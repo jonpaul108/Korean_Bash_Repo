@@ -12,12 +12,10 @@ app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/character/:id', (req, res) => {
   const query = req.params.id;
-  console.log(query);
   controller.read(query, (err, results) => {
     if (err) {
       res.status(404).send();
     } else {
-      console.log(results);
       res.status(200).json(results);
     }
   });

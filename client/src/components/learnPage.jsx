@@ -10,7 +10,10 @@ class Learn extends React.Component {
       kCharacter: "characterK",
       eCharacter: "chracterE",
       showExamples: false,
-      character: 0
+      character: 0,
+      type: 'Building Block',
+      examples: '아, 안',
+      words: '안녕하세요'
     }
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
@@ -47,7 +50,6 @@ class Learn extends React.Component {
 
   getCharacters() {
     const id = this.state.character;
-    console.log(id);
     axios.get(`/character/${id}`)
       .then((response) => {
         const res = response.data.rows[0];
@@ -70,26 +72,44 @@ class Learn extends React.Component {
   render() {
     const {
       kCharacter,
-      eCharacter
+      eCharacter,
+      type,
+      examples,
+      words
     } = this.state;
     const handlePageChange = this.props.handlePageChange;
     return (
       <div className={styles.background}>
-        <div>
-          <button>Hear it again</button>
+        <div className={styles.repeatSound}>
+          <img src='./sound-icon.png'></img>
         </div>
-        <div>
-          <span> {kCharacter}</span>
-          <span> Reading: {eCharacter}</span>
+          <div className={styles.kLetterContainer}>
+            <span className={styles.koreanCharacter}> {kCharacter}</span>
+          </div>
+          <div className={styles.englishCharacterContainer}>
+            <span className={styles.englishCharacter}>{eCharacter}</span>
         </div>
-        <div>
-          <button onClick={this.handleNextClick}>Next</button>
+        <div className={styles.changeCharacterContainer}>
+          <div>
+            <span>Type: </span><span>{type}</span>
+          </div>
+          <div>
+            <span> Examples: </span><span>{examples}</span>
+          </div>
+          <div>
+            <span>Words: </span><span>{words}</span>
+          </div>
         </div>
-        <div>
-          <button onClick={this.handleBackClick}>Back</button>
+        <div className={styles.changeCharacterContainer}>
+          <div>
+            <button className={styles.changeCharacter} onClick={this.handleBackClick}>Back</button>
+          </div>
+          <div>
+            <button className={styles.changeCharacter} onClick={this.handleNextClick}>Next</button>
+          </div>
         </div>
-        <div>
-          <button className={styles.play} onClick={handlePageChange} >Play</button>
+        <div className={styles.play}>
+          <button onClick={handlePageChange} >Play</button>
         </div>
       </div>
     )
