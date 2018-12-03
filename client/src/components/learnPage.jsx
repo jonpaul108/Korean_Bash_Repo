@@ -18,7 +18,6 @@ class Learn extends React.Component {
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
     this.getCharacters = this.getCharacters.bind(this);
-
   }
 
 
@@ -80,6 +79,9 @@ class Learn extends React.Component {
     const handlePageChange = this.props.handlePageChange;
     return (
       <div className={styles.background}>
+        <div className={styles.quizContainer}>
+          <button className={styles.changeCharacter}onClick={handlePageChange} >Play</button>
+        </div>
         <div className={styles.repeatSound}>
           <img src='./sound-icon.png'></img>
         </div>
@@ -107,9 +109,6 @@ class Learn extends React.Component {
           <div>
             <button className={styles.changeCharacter} onClick={this.handleNextClick}>Next</button>
           </div>
-        </div>
-        <div className={styles.play}>
-          <button onClick={handlePageChange} >Play</button>
         </div>
       </div>
     )
