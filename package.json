@@ -1,0 +1,39 @@
+{
+  "name": "korean_bash",
+  "version": "1.0.0",
+  "description": "Learn Korean!",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/index.js",
+    "start_dev": "webpack -d --watch",
+    "connect_db": "node db/index.js"
+  },
+  "author": "Jonathan McNamara",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "css-loader": "^1.0.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.14",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.7",
+    "pg": "^7.7.1",
+    "phaser": "^3.15.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "style-loader": "^0.23.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "moduleNameMapper": {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+    "\\.(css|less)$": "identity-obj-proxy"
+  }
+}
