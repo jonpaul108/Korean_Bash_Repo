@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import styles from '../css/learnPage.css';
 import sound from 'react-sound';
+import AudioPlayer from './audioPlayer.jsx';
 
 class Learn extends React.Component {
   constructor(props) {
@@ -91,7 +92,7 @@ class Learn extends React.Component {
           <button className={styles.changeCharacter}onClick={handlePageChange} >quiz</button>
         </div>
         <div className={styles.repeatSound}>
-          <img src='./sound-icon.png'></img>
+          <AudioPlayer className={styles.repeatSound}/>
         </div>
           <div className={styles.kLetterContainer}>
             <span className={styles.koreanCharacter}> {kCharacter}</span>

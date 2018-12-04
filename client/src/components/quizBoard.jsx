@@ -2,6 +2,7 @@ import React from 'react';
 import QuizPiece from './quizPiece.jsx';
 import styles from '../css/quizBoard.css';
 import axios from 'axios';
+import AudioPlayer from './audioPlayer.jsx';
 import utils from '../utils/utils.js';
 
 class QuizBoard extends React.Component {
@@ -87,6 +88,9 @@ class QuizBoard extends React.Component {
     return (
       <div className={styles.quizPage}>
         <div>Quiz</div>
+          <div className={styles.repeatSound}>
+            <AudioPlayer className={styles.repeatSound}/>
+          </div>
           <div>
             <button onClick={this.props.handlePageChange}>Back to Learn</button>
           </div>

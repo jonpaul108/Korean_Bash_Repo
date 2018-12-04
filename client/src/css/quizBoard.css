@@ -42,3 +42,10 @@
   font-size: 25px;
   align-self: flex-end;
 }
+
+.repeatSound {
+    align-self: flex-start;
+    position: relative;
+    left: 1%
+
+}
