@@ -11,15 +11,19 @@ class QuizBoard extends React.Component {
       test: 'test',
       score: 0,
       win: 'undecided',
-      time: 10,
       quizPieces: ['ㅏ', 'ㅗ', 'ㅓ'],
       currentPiece: 'ㅏ',
-      chances: 2
+      chances: 3
     }
     this.handlePoint = this.handlePoint.bind(this);
     this.handleIncorrect = this.handleIncorrect.bind(this);
+    this.setQuizPieces = this.setQuizPieces.bind(this);
   }
   componentDidMount() {
+    this.setQuizPieces();
+  }
+
+  setQuizPieces() {
     const characters = utils.randomPieces(this.state.quizPieces);
     const currentPiece = characters[1];
     const quizPieces = characters[0];
@@ -31,10 +35,11 @@ class QuizBoard extends React.Component {
 
   handlePoint(event) {
     const score = this.state.score + 1;
-    if (score < 10) {
+    if (score < 5) {
       this.setState({
         score
       });
+      this.setQuizPieces();
     } else {
       this.setState({
         score,
@@ -48,6 +53,7 @@ class QuizBoard extends React.Component {
       this.setState({
         chances
       });
+      this.setQuizPieces();
     } else {
       this.setState({
         chances,
