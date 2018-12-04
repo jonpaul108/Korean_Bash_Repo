@@ -4,7 +4,7 @@ module.exports.randomPieces = (pieces) => {
   let randomNum =  () => {
     return Math.floor(Math.random() * (tempStor.length));
   }
-  const chooser = randomNum();
+
   while (tempStor.length > 0) {
     let num = randomNum();
     console.log(num);
@@ -12,5 +12,5 @@ module.exports.randomPieces = (pieces) => {
     tempStor.splice(num, 1);
     console.log(tempStor);
   }
-  return [storage, chooser];
+  return storage;
 }

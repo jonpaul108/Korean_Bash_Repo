@@ -8,7 +8,7 @@ class Learn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sound: "file",
+      soundFile: "",
       kCharacter: "",
       eCharacter: "",
       showExamples: false,
@@ -17,7 +17,9 @@ class Learn extends React.Component {
       examples: '아, 안',
       words: '안녕하세요',
       characterSet: 'place holder',
-      sound
+      type: '',
+      learned: false
+
     }
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
@@ -59,13 +61,17 @@ class Learn extends React.Component {
         const res = response.data.rows[0];
         const kCharacter = res.korean;
         const eCharacter = res.english;
-        const characterSet = this.characterSet;
+        const characterSet = this.state.characterSet;
+        const type = res.type;
         const soundFile = res.sound_file;
+        const learned = res.learn;
         this.setState({
           kCharacter,
           eCharacter,
           characterSet,
-          soundFile
+          soundFile,
+          type,
+          learned
         })
       })
       .catch((err) => {
@@ -83,7 +89,8 @@ class Learn extends React.Component {
       eCharacter,
       type,
       examples,
-      words
+      words,
+      soundFile
     } = this.state;
     const handlePageChange = this.props.handlePageChange;
     return (
@@ -92,7 +99,9 @@ class Learn extends React.Component {
           <button className={styles.changeCharacter}onClick={handlePageChange} >quiz</button>
         </div>
         <div className={styles.repeatSound}>
-          <AudioPlayer className={styles.repeatSound}/>
+          <AudioPlayer className={styles.repeatSound}
+            soundFile={soundFile}
+            />
         </div>
           <div className={styles.kLetterContainer}>
             <span className={styles.koreanCharacter}> {kCharacter}</span>

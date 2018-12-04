@@ -16,6 +16,18 @@ app.get('/character/:id', (req, res) => {
     if (err) {
       res.status(404).send();
     } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
+app.get('/character/current/:id', (req, res) => {
+  const query = req.params.id;
+  controller.readCurrentPiece(query, (err, results) => {
+    if (err) {
+      console.log('err', err);
+      res.status(404).send();
+    } else {
       console.log(results);
       res.status(200).json(results);
     }

@@ -13,23 +13,41 @@ class QuizBoard extends React.Component {
       score: 0,
       win: 'undecided',
       quizPieces: ['ㅏ', 'ㅗ', 'ㅓ'],
-      currentPiece: 'ㅏ',
-      chances: 3
+      currentPiece: '',
+      chances: 3,
+      soundFile: ''
     }
     this.handlePoint = this.handlePoint.bind(this);
     this.handleIncorrect = this.handleIncorrect.bind(this);
     this.setQuizPieces = this.setQuizPieces.bind(this);
+    this.getPiece = this.getPiece.bind(this);
   }
   componentDidMount() {
     this.setQuizPieces();
+    this.getPiece();
+  }
+
+  getPiece() {
+    let id = Math.floor(Math.random() * 3);
+    axios.get(`/character/current/${id}`)
+      .then((response) => {
+        const res = response.data.rows[0];
+        const soundFile = res.sound_file;
+        console.log('soundFile', soundFile)
+        const currentPiece = res.korean;
+        this.setState({
+          currentPiece,
+          soundFile
+        })
+      })
+      .catch((err) => {
+        console.log('err');
+      });
   }
 
   setQuizPieces() {
-    const characters = utils.randomPieces(this.state.quizPieces);
-    const currentPiece = characters[1];
-    const quizPieces = characters[0];
+    const quizPieces = utils.randomPieces(this.state.quizPieces);
     this.setState({
-      currentPiece,
       quizPieces
     });
   }
@@ -40,12 +58,13 @@ class QuizBoard extends React.Component {
       this.setState({
         score
       });
+      this.getPiece();
       this.setQuizPieces();
     } else {
       this.setState({
         score,
         win: true
-      })
+      });
     }
   }
   handleIncorrect(event) {
@@ -54,7 +73,6 @@ class QuizBoard extends React.Component {
       this.setState({
         chances
       });
-      this.setQuizPieces();
     } else {
       this.setState({
         chances,
@@ -70,18 +88,25 @@ class QuizBoard extends React.Component {
       currentPiece,
       win,
       score,
-      chances
+      chances,
+      soundFile
     } = this.state;
     let point = false;
     if (win === true) {
-      return (<div>You won! <div>
-        <button onClick={this.props.handlePageChange}>Back to Learn</button>
+      return (<div className={styles.quizPage} >
+        <span className={styles.message}>
+        You won!
+        </span>
+        <div className={styles.changePage}>
+        <button  onClick={this.props.handlePageChange}>Back to Learn</button>
       </div></div>);
     } else if (win === false) {
-      return (<div>
-        Too many errors.
-        <div>
-          <button onClick={this.props.handlePageChange}>Back to Learn</button>
+      return (<div className={styles.quizPage}>
+          <span className={styles.message}>
+            <span>Try </span> <span> again!</span>
+          </span>
+        <div className={styles.changePage}>
+          <button  onClick={this.props.handlePageChange}>Back to Learn</button>
         </div>
       </div>);
     }
@@ -89,10 +114,13 @@ class QuizBoard extends React.Component {
       <div className={styles.quizPage}>
         <div>Quiz</div>
           <div className={styles.repeatSound}>
-            <AudioPlayer className={styles.repeatSound}/>
+            <AudioPlayer
+              soundFile={soundFile}
+              key={currentPiece}
+              />
           </div>
-          <div>
-            <button onClick={this.props.handlePageChange}>Back to Learn</button>
+          <div className={styles.changePage}>
+            <button  onClick={this.props.handlePageChange}>Back to Learn</button>
           </div>
           <div className={styles.scoreAndQuiz}>
             <span className={styles.info}>score: {score}</span>
