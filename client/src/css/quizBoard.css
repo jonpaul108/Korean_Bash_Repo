@@ -1,0 +1,44 @@
+.quizContainer {
+  display: flex;
+  width: 50%;
+  height: 25%;
+  position:relative;
+  top: 25%;
+  justify-content: space-evenly;
+}
+
+.quizPieceInnerContainer {
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  border-radius: 25%;
+  border: 2px solid rgb(211,211,211, 0.5);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.quizPage {
+  width: 100%;
+  height: 800px;
+  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.scoreAndQuiz {
+  width: 20%;
+  height: 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  align-self: flex-end;
+  right: 3%;
+}
+
+.info {
+  font-size: 25px;
+  align-self: flex-end;
+}

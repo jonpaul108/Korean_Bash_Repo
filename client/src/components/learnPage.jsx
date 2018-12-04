@@ -1,23 +1,27 @@
 import React from 'react';
 import axios from 'axios';
 import styles from '../css/learnPage.css';
+import sound from 'react-sound';
 
 class Learn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       sound: "file",
-      kCharacter: "characterK",
-      eCharacter: "chracterE",
+      kCharacter: "",
+      eCharacter: "",
       showExamples: false,
       character: 0,
       type: 'Building Block',
       examples: '아, 안',
-      words: '안녕하세요'
+      words: '안녕하세요',
+      characterSet: 'place holder',
+      sound
     }
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
     this.getCharacters = this.getCharacters.bind(this);
+    this.audio = new Audio(this.state.sound);
   }
 
 
@@ -53,10 +57,14 @@ class Learn extends React.Component {
       .then((response) => {
         const res = response.data.rows[0];
         const kCharacter = res.korean;
-        const eCharacter = res.romanization;
+        const eCharacter = res.english;
+        const characterSet = this.characterSet;
+        const soundFile = res.sound_file;
         this.setState({
           kCharacter,
-          eCharacter
+          eCharacter,
+          characterSet,
+          soundFile
         })
       })
       .catch((err) => {
@@ -80,7 +88,7 @@ class Learn extends React.Component {
     return (
       <div className={styles.background}>
         <div className={styles.quizContainer}>
-          <button className={styles.changeCharacter}onClick={handlePageChange} >Play</button>
+          <button className={styles.changeCharacter}onClick={handlePageChange} >quiz</button>
         </div>
         <div className={styles.repeatSound}>
           <img src='./sound-icon.png'></img>

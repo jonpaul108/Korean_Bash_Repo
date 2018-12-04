@@ -1,7 +1,7 @@
 const Client = require('../db/index.js');
 
 module.exports.read = (query, callback) => {
-  queryStr = `SELECT * FROM korean WHERE id = ${query}`;
+  queryStr = `SELECT * FROM korean_bash WHERE id = ${query}`;
   Client.query(queryStr, (err, results) => {
     if (err) {
       callback(err);

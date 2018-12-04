@@ -1,12 +1,12 @@
 import React from 'react';
 import Learn from './learnPage.jsx';
-import GameBoard from './gameBoard.jsx';
+import QuizBoard from './quizBoard.jsx';
 
 const ConditionalRenderer = (props) => {
   if (props.page === 'learn page') {
     return <div><Learn handlePageChange={props.handlePageChange}/></div>
   } else {
-    return <div> <GameBoard handlePageChange={props.handlePageChange}/> </div>
+    return <div> <QuizBoard handlePageChange={props.handlePageChange}/> </div>
   }
 }
 

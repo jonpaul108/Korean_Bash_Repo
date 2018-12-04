@@ -16,6 +16,7 @@ app.get('/character/:id', (req, res) => {
     if (err) {
       res.status(404).send();
     } else {
+      console.log(results);
       res.status(200).json(results);
     }
   });

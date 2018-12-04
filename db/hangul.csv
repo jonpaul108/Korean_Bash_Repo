@@ -1,4 +1,5 @@
-id,korean,romanization,english,sound_file
-0,ㅏ,(a) as in apply,letter,blank_path
-1,ㅓ,(oe) shorter o as in lot,type: letter,blank_path
-2,ㅗ,(o) o that is rounded as in own,type: letter,blank_path
+id,korean,english,type,sound_file,learn
+0,ㅏ,(a) as in apply,Building Block,./sounds/ah.m4a, false
+1,ㅓ,(oe) shorter o as in lot,Building Block,./sounds/eo.m4a, false
+2,ㅗ,(o) o that is rounded as in own,type: letter,./sounds/o.m4a, false
+3,안녕하세요,hi,word,./sound/hi.m4a, false
