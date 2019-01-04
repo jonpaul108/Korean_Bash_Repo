@@ -10,7 +10,6 @@ module.exports.randomPieces = (pieces) => {
     console.log(num);
     storage.push(tempStor[num]);
     tempStor.splice(num, 1);
-    console.log(tempStor);
   }
   return storage;
 }

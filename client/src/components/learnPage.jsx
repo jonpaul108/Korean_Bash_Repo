@@ -96,7 +96,7 @@ class Learn extends React.Component {
     return (
       <div className={styles.background}>
         <div className={styles.quizContainer}>
-          <button className={styles.changeCharacter}onClick={handlePageChange} >quiz</button>
+          <button className={styles.changeCharacter} value="gameboard" onClick={handlePageChange} >quiz</button>
         </div>
         <div className={styles.repeatSound}>
           <AudioPlayer className={styles.repeatSound}

@@ -1,6 +1,13 @@
-const { Client } = require('pg');
+const express = require('express');
+const app = express();
+const passport = require('passport');
+const request = require('request');
+const { Pool, Client } = require('pg')
+const bcrypt = require('bcrypt')
+const uuidv4 = require('uuid/v4');
+const LocalStrategy = require('passport-local').Strategy;
 
-const client = new Client({
+const hangul = new Pool({
   user: 'jonathanmcnamara',
   host: 'localhost',
   database: 'hangul',
@@ -8,7 +15,7 @@ const client = new Client({
   port: 5432,
 });
 
-client.connect((err) => {
+hangul.connect((err) => {
   if (err) {
     console.log('err: ', err)
   } else {
@@ -16,4 +23,4 @@ client.connect((err) => {
   }
 });
 
-module.exports = client;
+module.exports = hangul;
