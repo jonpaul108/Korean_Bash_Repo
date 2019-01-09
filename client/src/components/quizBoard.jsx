@@ -98,7 +98,7 @@ class QuizBoard extends React.Component {
         You won!
         </span>
         <div className={styles.changePage}>
-        <button  onClick={this.props.handlePageChange}>Back to Learn</button>
+        <button  value='learn page' onClick={this.props.handlePageChange}>Back to Learn</button>
       </div></div>);
     } else if (win === false) {
       return (<div className={styles.quizPage}>
