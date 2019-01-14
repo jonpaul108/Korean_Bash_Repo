@@ -6,6 +6,11 @@ import zxcvbn from 'zxcvbn';
 import {
   connect
 } from 'react-redux';
+import changePage from '../actions/changePage.js';
+import username from '../actions/username.js';
+import accountAlreadyExists from '../actions/auth/accountAlreadyExists.js';
+import accountEmail from '../actions/auth/accountEmail.js';
+import createPassword from '../actions/auth/createPassword.js';
 
 class Register extends React.Component {
   constructor(props) {
@@ -51,30 +56,22 @@ class Register extends React.Component {
   }
 
   handleOnChange(event) {
-    let pass = 0;
-    let feed = '';
-    if (event.target.name === 'newPassword') {
-      const {
-        score
-      } = zxcvbn(event.target.value);
-      pass = score;
-    }
-    this.setState({
-      [event.target.name]: event.target.value,
-      score: pass
-    })
+    const func = this.props[event.target.name];
+    const val = event.target.value;
+    func(val);
+
   }
 
   render() {
     const {
-      newUsername,
-      newPassword,
-      email,
-      message,
       score,
       isRegistered
     } = this.props;
-    const handlePageChange = this.props.handlePageChange;
+    const newUsername = this.props.username;
+    const newPassword = this.props.newPassword;
+    const email = this.props.email;
+    const message = this.props.message;
+    const handlePageChange = this.props.changePage;
     const handleOnChange = this.handleOnChange;
     const handleRegister = this.handleRegister;
 
@@ -86,8 +83,8 @@ class Register extends React.Component {
         <span className={styles.signInText}>Make an account: </span>
           <form onSubmit={handleRegister} className={styles.logIn}>
             <input className={styles.input} type='text' placeholder='email' name='email' value={email} onChange={handleOnChange}></input>
-            <input className={styles.input} type='text' placeholder='username' name='newUsername' value={newUsername} onChange={handleOnChange}></input>
-            <input className={styles.input}type='text' placeholder='password' name='newPassword' value={newPassword} onChange={handleOnChange}></input>
+            <input className={styles.input} type='text' placeholder='username' name='username' value={newUsername} onChange={handleOnChange}></input>
+            <input className={styles.input}type='text' placeholder='password' name='createPassword' value={newPassword} onChange={handleOnChange}></input>
             <div className={styles.submitContainer}>
               <input className={styles.submit} type='submit' value='Submit'></input>
             </div>
@@ -100,5 +97,16 @@ class Register extends React.Component {
     </div>
   }
 }
-
-export default connect()(Register);
+const mapStateToProps = state => ({
+  page: state.page.item,
+  newPassword: state.newPassword.item,
+  username: state.username.item,
+  email: state.email.item,
+})
+export default connect(mapStateToProps, {
+  changePage,
+  username,
+  accountAlreadyExists,
+  createPassword,
+  accountEmail
+})(Register);

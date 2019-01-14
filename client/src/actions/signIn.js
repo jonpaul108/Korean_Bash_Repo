@@ -1,4 +1,4 @@
-import {SIGN_IN, INCORRECT_LOGIN_INFORMATION} from './types.js';
+import {SIGN_IN, INCORRECT_LOGIN_INFORMATION, PASSWORD, USERNAME} from './types.js';
 import axios from 'axios';
 
 const signIn = (username, password) => (dispatch) => {
@@ -17,5 +17,6 @@ const signIn = (username, password) => (dispatch) => {
 
     });
 }
+
 
 export default signIn;

@@ -15,8 +15,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 'signIn',
-      loggedIn: false,
       username: '',
       password: '',
       message: ''
@@ -46,19 +44,20 @@ class App extends React.Component {
 
   render() {
     const {
-      page,
-      loggedIn,
       username,
       password,
       message
     } = this.state;
+    const loggedIn = this.props.loggedIn;
+    const page = this.props.page;
+    console.log('app: ', loggedIn);
     const handlePageChange = this.handlePageChange;
     const handleLogin = this.handleLogin;
     const handleRegister = this.handleRegister;
     const handleLogIn = this.handleLogIn;
     const handleOnChange = this.handleOnChange;
     const handleNewUserRegistration = this.props.handleNewUserRegistration;
-    return <provider store={store}>
+    return <Provider store={store}>
       <div className={styles.container}>
         <ConditionalRenderer
           page={page}
@@ -66,9 +65,15 @@ class App extends React.Component {
           loggedIn={loggedIn}
           />
       </div>
-    </provider>
+    </Provider>
 
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  loggedIn: state.loggedIn.item,
+  page: state.page.item
+
+});
+
+export default connect(mapStateToProps)(App);
