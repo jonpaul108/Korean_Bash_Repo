@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from '../css/signIn.css';
+import store from '../store/store.js';
 import axios from 'axios';
 import zxcvbn from 'zxcvbn';
+import {
+  connect
+} from 'react-redux';
 
 class Register extends React.Component {
   constructor(props) {
@@ -20,7 +24,10 @@ class Register extends React.Component {
     this.handleRegister = this.handleRegister.bind(this);
   }
 
-
+  handleDispatch() {
+    console.log('dispatched from register');
+    store.dispatch(changePage('signIn'));
+  }
   handleRegister(event) {
     event.preventDefault();
     const user = this.state.newUsername;
@@ -32,9 +39,7 @@ class Register extends React.Component {
         email
       })
       .then((response) => {
-        this.setState({
-          isRegistered: true
-        });
+        this.handleDispatch();
       })
       .catch((err) => {
         let message = 'Username or Email already in use';
@@ -96,4 +101,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default connect()(Register);
