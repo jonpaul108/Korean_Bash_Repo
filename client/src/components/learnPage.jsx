@@ -8,13 +8,13 @@ import {
 } from 'react-redux';
 import learnPageSetup from '../actions/flashCards/learnPageSetup.js';
 import charNum from '../actions/flashCards/charNum.js';
+import changePage from '../actions/changePage.js';
 
 class Learn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showExamples: false,
-      type: 'Building Block',
       examples: '아, 안',
       words: '안녕하세요',
       characterSet: 'place holder',
@@ -107,5 +107,6 @@ const mapStateToProps = state => ({
 });
 export default connect(mapStateToProps, {
   learnPageSetup,
-  charNum
+  charNum,
+  changePage
 })(Learn);

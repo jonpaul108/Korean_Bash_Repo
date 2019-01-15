@@ -6,32 +6,33 @@ import store from '../store/store.js';
 import {
   connect
 } from 'react-redux';
+import changePage from '../actions/changePage.js';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+  handlePageChange(event) {
+    const page = event.target.value;
+    console.log(event.target.value);
+    this.props.changePage(page);
   }
 
-  handleOnChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
   render() {
     const {
       loggedIn,
       page
     } = this.props;
-    const handleLogIn = this.handleLogIn;
-    const handleOnChange = this.handleOnChange;
+    const handlePageChange = this.handlePageChange;
 
     if (loggedIn === false) {
       return <div>
         <Auth
         page={page}
         loggedIn={loggedIn}
+        handlePageChange={handlePageChange}
         />
       </div>
     } else {
@@ -39,6 +40,7 @@ class App extends React.Component {
         <ConditionalRenderer
           page={page}
           loggedIn={loggedIn}
+          handlePageChange={handlePageChange}
           />
       </div>
     }
@@ -50,4 +52,6 @@ const mapStateToProps = state => ({
   page: state.page.item
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, {
+  changePage
+})(App);

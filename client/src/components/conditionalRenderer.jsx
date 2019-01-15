@@ -8,12 +8,14 @@ import {
 } from 'react-redux';
 
 const ConditionalRenderer = (props) => {
-  console.log('page in conditions: ', props.page);
+  const handlePageChange = props.handlePageChange;
   if (props.page === 'gameboard') {
     return <div> <QuizBoard handlePageChange={handlePageChange}/> </div>
   } else if (props.page === 'learn_page') {
     return <div>
-      <Learn />
+      <Learn
+        handlePageChange={handlePageChange}
+        />
   </div>
   }
 }

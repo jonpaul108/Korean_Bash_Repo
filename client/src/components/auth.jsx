@@ -3,11 +3,15 @@ import SignIn from './signIn.jsx';
 import Register from './register.jsx';
 
 const Auth = (props) => {
-  console.log('auth');
+  const handlePageChange = props.handlePageChange;
   if (props.page === 'signIn') {
-    return <div><SignIn /></div>
+    return <div><SignIn
+      handlePageChange={handlePageChange}
+       /></div>
   } else {
-    return <div><Register /></div>
+    return <div><Register
+      handlePageChange={handlePageChange}
+      /></div>
   }
 }
 

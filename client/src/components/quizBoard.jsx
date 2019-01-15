@@ -98,7 +98,7 @@ class QuizBoard extends React.Component {
         You won!
         </span>
         <div className={styles.changePage}>
-        <button  value='learn page' onClick={this.props.handlePageChange}>Back to Learn</button>
+        <button  value='learn_page' onClick={this.props.handlePageChange}>Back to Learn</button>
       </div></div>);
     } else if (win === false) {
       return (<div className={styles.quizPage}>
@@ -106,7 +106,7 @@ class QuizBoard extends React.Component {
             <span>Try </span> <span> again!</span>
           </span>
         <div className={styles.changePage}>
-          <button  value='learn page' onClick={this.props.handlePageChange}>Back to Learn</button>
+          <button  value='learn_page' onClick={this.props.handlePageChange}>Back to Learn</button>
         </div>
       </div>);
     }
@@ -120,7 +120,7 @@ class QuizBoard extends React.Component {
               />
           </div>
           <div className={styles.changePage}>
-            <button  value='learn page' onClick={this.props.handlePageChange}>Back to Learn</button>
+            <button  value='learn_page' onClick={this.props.handlePageChange}>Back to Learn</button>
           </div>
           <div className={styles.scoreAndQuiz}>
             <span className={styles.info}>score: {score}</span>

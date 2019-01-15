@@ -20,7 +20,7 @@ class Register extends React.Component {
       score: '',
       feedback: ''
     }
-    this.handlePageChange = this.handlePageChange.bind(this);
+    this.handlePageChange = this.props.handlePageChange.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
   }

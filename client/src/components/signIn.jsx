@@ -50,7 +50,7 @@ class SignIn extends React.Component {
       message
     } = this.props;
 
-    const handlePageChange = this.handlePageChange;
+    const handlePageChange = this.props.handlePageChange;
     const handleLogin = this.handleLogin;
     const handleLogIn = this.handleLogIn;
     const handleOnChange = this.handleOnChange;
