@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from '../css/signIn.css';
-import axios from 'axios';
 import {
   connect
 } from 'react-redux';
@@ -22,7 +21,8 @@ class SignIn extends React.Component {
   }
 
   handlePageChange(event) {
-    const page = event.target.value || 'signIn';
+    const page = event.target.value;
+    console.log(event.target.value);
     this.props.changePage(page);
   }
 
@@ -36,23 +36,25 @@ class SignIn extends React.Component {
     event.preventDefault();
     const user = this.props.currUsername;
     const pass = this.props.currPassword;
-    this.props.signIn(user, pass);
+    this.props.signIn(user, pass, () => {
+      this.props.changePage('learn_page');
+    });
 
   }
 
   render() {
-    const loggedIn = this.props.loggedIn;
-    const currPassword = this.props.currPassword;
-    const currUsername = this.props.currUsername;
-    console.log(currUsername);
     const {
+      loggedIn,
+      currPassword,
+      currUsername,
       message
-    } = this.state;
+    } = this.props;
+
     const handlePageChange = this.handlePageChange;
     const handleLogin = this.handleLogin;
-    const handleRegister = this.handleRegister;
     const handleLogIn = this.handleLogIn;
     const handleOnChange = this.handleOnChange;
+
     return <div className={styles.loginPage}>
       <span>{loggedIn}</span>
         <div className={styles.loginBox}>
@@ -79,7 +81,8 @@ const mapStateToProps = state => ({
   loggedIn: state.loggedIn.item,
   currUsername: state.currUsername.item,
   currPassword: state.currPassword.item,
-  page: state.page.item
+  page: state.page.item,
+  message: state.message.item
 })
 
 export default connect(mapStateToProps, {

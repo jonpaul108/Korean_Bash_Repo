@@ -1,7 +1,7 @@
 import {SIGN_IN} from '../actions/types.js';
 
 const initialState = {
-  item: false,
+  item: false
 }
 
 export default (state = initialState, action) => {

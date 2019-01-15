@@ -1,7 +1,7 @@
 import {CREATE_ACCOUNT} from '../actions.types';
 
 const initialState = {
-  page: 'signIn'
+  item: 'signIn'
 }
 
 export default (state = initialState, action) => {
