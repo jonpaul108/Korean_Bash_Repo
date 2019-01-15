@@ -6,6 +6,8 @@ import changePageReducer from './changePageReducer.js';
 import accountEmailReducer from './auth/accountEmailReducer.js';
 import createPasswordReducer from './auth/createPasswordReducer.js';
 import messageReducer from './auth/messageReducer.js';
+import learnPageSetupReducer from './flashCards/learnPageSetupReducer.js';
+import charNumReducer from './flashCards/charNumReducer.js';
 
 console.log('in root reducer');
 
@@ -16,5 +18,8 @@ export default combineReducers({
   page: changePageReducer,
   newPassword: createPasswordReducer,
   email: accountEmailReducer,
-  message: messageReducer
+  message: messageReducer,
+  learnPageSetup: learnPageSetupReducer,
+  kCharacter: learnPageSetupReducer,
+  character: learnPageSetupReducer
 });

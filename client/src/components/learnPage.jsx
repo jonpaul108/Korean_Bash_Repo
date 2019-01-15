@@ -3,84 +3,48 @@ import axios from 'axios';
 import styles from '../css/learnPage.css';
 import sound from 'react-sound';
 import AudioPlayer from './audioPlayer.jsx';
+import {
+  connect
+} from 'react-redux';
+import learnPageSetup from '../actions/flashCards/learnPageSetup.js';
+import charNum from '../actions/flashCards/charNum.js';
 
 class Learn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      soundFile: "",
-      kCharacter: "",
-      eCharacter: "",
       showExamples: false,
-      character: 0,
       type: 'Building Block',
       examples: '아, 안',
       words: '안녕하세요',
       characterSet: 'place holder',
-      type: '',
-      learned: false
-
     }
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
-    this.getCharacters = this.getCharacters.bind(this);
     this.audio = new Audio(this.state.sound);
   }
 
 
   handleNextClick(event) {
-    let num = this.state.character;
+    let num = this.props.character;
     num++;
-    console.log(num);
     if (num > 2) {
       num = 0;
     }
-    this.setState({
-      character: num
-    });
-    this.getCharacters();
+    this.props.learnPageSetup(num);
   }
 
   handleBackClick(event) {
-    let num = this.state.character;
+    let num = this.props.character;
     num--;
-    console.log(num);
     if (num < 0) {
       num = 2;
     }
-    this.setState({
-      character: num
-    });
-    this.getCharacters();
-  }
-
-  getCharacters() {
-    const id = this.state.character;
-    axios.get(`/character/${id}`)
-      .then((response) => {
-        const res = response.data.rows[0];
-        const kCharacter = res.korean;
-        const eCharacter = res.english;
-        const characterSet = this.state.characterSet;
-        const type = res.type;
-        const soundFile = res.sound_file;
-        const learned = res.learn;
-        this.setState({
-          kCharacter,
-          eCharacter,
-          characterSet,
-          soundFile,
-          type,
-          learned
-        })
-      })
-      .catch((err) => {
-        console.log('error: ', err);
-      });
+    this.props.learnPageSetup(num);
   }
 
   componentDidMount() {
-    this.getCharacters();
+    this.props.learnPageSetup(0);
   }
 
   render() {
@@ -91,7 +55,7 @@ class Learn extends React.Component {
       examples,
       words,
       soundFile
-    } = this.state;
+    } = this.props;
     const handlePageChange = this.props.handlePageChange;
     return (
       <div className={styles.background}>
@@ -132,5 +96,16 @@ class Learn extends React.Component {
     )
   }
 }
-
-export default Learn;
+const mapStateToProps = state => ({
+  kCharacter: state.learnPageSetup.kCharacter,
+  eCharacter: state.learnPageSetup.eCharacter,
+  type: state.learnPageSetup.fileType,
+  examples: state.learnPageSetup.examples,
+  words: state.learnPageSetup.words,
+  soundFile: state.learnPageSetup.soundFile,
+  character: state.learnPageSetup.character
+});
+export default connect(mapStateToProps, {
+  learnPageSetup,
+  charNum
+})(Learn);
