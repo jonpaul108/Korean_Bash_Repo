@@ -1,12 +1,11 @@
-import {SIGN_IN, CREATE_ACCOUNT} from './types.js';
+import {CHANGE_PAGE } from './types.js';
 
-// 
-// export changePage = () => {
-//   return (dispatch) =>{
-//
-//   }
-// }
-// const changePage = (page) => ({
-//   type: 'change_Page',
-//   data: page
-// });
+const changePage = (page) => (dispatch) => {
+  console.log('page in changePage ', page)
+  dispatch({
+    type: CHANGE_PAGE,
+    payload: page
+  });
+}
+
+export default changePage;

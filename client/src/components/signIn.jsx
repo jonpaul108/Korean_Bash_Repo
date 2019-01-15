@@ -1,17 +1,18 @@
 import React from 'react';
 import styles from '../css/signIn.css';
-import axios from 'axios';
 import {
   connect
 } from 'react-redux';
 import signIn from '../actions/signIn.js';
+import password from '../actions/password.js';
+import username from '../actions/username.js';
+import changePage from '../actions/changePage.js';
+
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
       message: ''
     }
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -20,54 +21,54 @@ class SignIn extends React.Component {
   }
 
   handlePageChange(event) {
-    const page = event.target.value || 'signIn';
-    this.setState({
-      page,
-      loggedIn: true
-    });
+    const page = event.target.value;
+    console.log(event.target.value);
+    this.props.changePage(page);
   }
 
   handleOnChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+    const func = this.props[event.target.name];
+    const val = event.target.value;
+    func(val);
   }
 
   handleLogin(event) {
     event.preventDefault();
-    const username = this.state.username;
-    const password = this.state.password;
-    this.props.signIn(username, password);
+    const user = this.props.currUsername;
+    const pass = this.props.currPassword;
+    this.props.signIn(user, pass, () => {
+      this.props.changePage('learn_page');
+    });
 
   }
 
   render() {
-    const loggedIn = this.props.loggedIn;
     const {
-      page,
-      username,
-      password,
+      loggedIn,
+      currPassword,
+      currUsername,
       message
-    } = this.state;
+    } = this.props;
+
     const handlePageChange = this.handlePageChange;
     const handleLogin = this.handleLogin;
-    const handleRegister = this.handleRegister;
     const handleLogIn = this.handleLogIn;
     const handleOnChange = this.handleOnChange;
+
     return <div className={styles.loginPage}>
       <span>{loggedIn}</span>
         <div className={styles.loginBox}>
         <div className={styles.logIn}>
           <span className={styles.signInText}>Sign in: </span>
             <form onSubmit={handleLogin} className={styles.logIn}>
-              <input className={styles.input} type='text' placeholder='username' name='username' value={username} onChange={handleOnChange}></input>
-              <input className={styles.input}type='text' placeholder='password' name='password' value={password} onChange={handleOnChange}></input>
+              <input className={styles.input} type='text' placeholder='username' name='username' value={currUsername} onChange={handleOnChange}></input>
+              <input className={styles.input}type='text' placeholder='password' name='password' value={currPassword} onChange={handleOnChange}></input>
               <div className={styles.submitContainer}>
                 <input className={styles.submit} type='submit' value='Submit'></input>
               </div>
             </form>
             <div className={styles.registerContainer}>
-              <button className={styles.register}value='register' onClick={handlePageChange}>Need an account?</button>
+              <button className={styles.register} value='register' onClick={handlePageChange}>Need an account?</button>
               <span className={styles.message}>{message}</span>
             </div>
         </div>
@@ -77,9 +78,16 @@ class SignIn extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  loggedIn: state.loggedIn.items
+  loggedIn: state.loggedIn.item,
+  currUsername: state.currUsername.item,
+  currPassword: state.currPassword.item,
+  page: state.page.item,
+  message: state.message.item
 })
 
 export default connect(mapStateToProps, {
-  signIn
+  signIn,
+  username,
+  password,
+  changePage
 })(SignIn);

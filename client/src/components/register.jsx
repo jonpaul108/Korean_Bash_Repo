@@ -1,68 +1,48 @@
 import React from 'react';
 import styles from '../css/signIn.css';
 import store from '../store/store.js';
-import axios from 'axios';
 import zxcvbn from 'zxcvbn';
 import {
   connect
 } from 'react-redux';
+import changePage from '../actions/changePage.js';
+import username from '../actions/username.js';
+import accountAlreadyExists from '../actions/auth/accountAlreadyExists.js';
+import accountEmail from '../actions/auth/accountEmail.js';
+import createPassword from '../actions/auth/createPassword.js';
+import register from '../actions/register.js';
 
 class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      newUsername: '',
-      newPassword: '',
-      email: '',
-      loggedIn: false,
       message: '',
       score: '',
-      feedback: '',
-      isRegistered: false
+      feedback: ''
     }
+    this.handlePageChange = this.handlePageChange.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
   }
 
-  handleDispatch() {
-    console.log('dispatched from register');
-    store.dispatch(changePage('signIn'));
+  handlePageChange() {
+    this.props.changePage('signIn');
   }
   handleRegister(event) {
     event.preventDefault();
-    const user = this.state.newUsername;
-    const password = this.state.newPassword;
-    const email = this.state.email;
-    axios.post(`/user`, {
-        username: user,
-        password: password,
-        email
-      })
-      .then((response) => {
-        this.handleDispatch();
-      })
-      .catch((err) => {
-        let message = 'Username or Email already in use';
-        console.log('in error');
-        this.setState({
-          message
-        });
-      })
+    const user = this.props.newUsername;
+    const password = this.props.newPassword;
+    const email = this.props.email;
+    const toSignIn = this.props.changePage.bind(this);
+    this.props.register(user, password, email, () => {
+      this.props.changePage('signIn');
+    });
   }
 
   handleOnChange(event) {
-    let pass = 0;
-    let feed = '';
-    if (event.target.name === 'newPassword') {
-      const {
-        score
-      } = zxcvbn(event.target.value);
-      pass = score;
-    }
-    this.setState({
-      [event.target.name]: event.target.value,
-      score: pass
-    })
+    const func = this.props[event.target.name];
+    const val = event.target.value;
+    func(val);
   }
 
   render() {
@@ -71,23 +51,21 @@ class Register extends React.Component {
       newPassword,
       email,
       message,
-      score,
-      isRegistered
     } = this.props;
-    const handlePageChange = this.props.handlePageChange;
     const handleOnChange = this.handleOnChange;
     const handleRegister = this.handleRegister;
+    const handlePageChange = this.handlePageChange;
 
     return <div className={styles.loginPage}>
       <span className={styles.message}>{message}</span>
-      <span>password strength (out of 4): {score}</span>
+      <span>password strength (out of 4): 1</span>
       <div className={styles.loginBox}>
       <div className={styles.logIn}>
         <span className={styles.signInText}>Make an account: </span>
           <form onSubmit={handleRegister} className={styles.logIn}>
-            <input className={styles.input} type='text' placeholder='email' name='email' value={email} onChange={handleOnChange}></input>
-            <input className={styles.input} type='text' placeholder='username' name='newUsername' value={newUsername} onChange={handleOnChange}></input>
-            <input className={styles.input}type='text' placeholder='password' name='newPassword' value={newPassword} onChange={handleOnChange}></input>
+            <input className={styles.input} type='text' placeholder='email' name='accountEmail' value={email} onChange={handleOnChange}></input>
+            <input className={styles.input} type='text' placeholder='username' name='username' value={newUsername} onChange={handleOnChange}></input>
+            <input className={styles.input}type='text' placeholder='password' name='createPassword' value={newPassword} onChange={handleOnChange}></input>
             <div className={styles.submitContainer}>
               <input className={styles.submit} type='submit' value='Submit'></input>
             </div>
@@ -100,5 +78,18 @@ class Register extends React.Component {
     </div>
   }
 }
-
-export default connect()(Register);
+const mapStateToProps = state => ({
+  page: state.page.item,
+  newPassword: state.newPassword.item,
+  newUsername: state.currUsername.item,
+  email: state.email.item,
+  message: state.message.item
+})
+export default connect(mapStateToProps, {
+  changePage,
+  username,
+  accountAlreadyExists,
+  createPassword,
+  accountEmail,
+  register
+})(Register);
