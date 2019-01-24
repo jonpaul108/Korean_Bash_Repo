@@ -1,7 +1,6 @@
 const express = require('express');
 // require('dotenv').config();
 const flash = require('connect-flash');
-const passport = require('passport');
 const request = require('request');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -12,6 +11,8 @@ const controller = require('../controller/index.js');
 const app = express();
 const port = process.env.PORT || 3020;
 const jsonParser = bodyParser.json();
+
+
 
 // app.use(require('cookie-parser')());
 // const expressSession = require('express-session');
@@ -32,20 +33,12 @@ app.use('/', express.static(path.join(__dirname, '../client/dist')));
 // }));
 
 
+
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-// app.set('view engine', 'pug');
-// app.set('view options', { layout: false });
 
-// app.use((req, res, next) => {
-//     if (req.cookies.user_sid && !req.session.user) {
-//         res.clearCookie('user_sid');
-//     }
-//     next();
-// });
-
-// require('../lib/routes.js')(app);
 
 app.get('/character/:id', (req, res) => {
   const query = req.params.id;

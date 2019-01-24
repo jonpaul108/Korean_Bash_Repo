@@ -1,8 +1,8 @@
-const passport = require('passport');
+// const passport = require('passport');
 const request = require('request');
 const bcrypt = require('bcrypt')
 const uuidv4 = require('uuid/v4');
-const LocalStrategy = require('passport-local').Strategy;
+// const LocalStrategy = require('passport-local').Strategy;
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 
