@@ -7,8 +7,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleChangePage: e => {
-    const page = e.target.value;
+  handleChangePage: page => {
+    console.log('home contianer e.value: ', page);
     dispatch(changePage(page));
   }
 });
