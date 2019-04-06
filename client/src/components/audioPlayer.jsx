@@ -3,11 +3,8 @@ import React from 'react'
 class AudioPlayer extends React.Component {
   constructor(props) {
     super(props)
-      this.state = {
-        test:'test'
-      }
-      this.playAudio = this.playAudio.bind(this);
-    }
+    this.playAudio = this.playAudio.bind(this);
+  }
 
   playAudio() {
     audio_tag.play();

@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from '../css/app.css';
-import ConditionalRenderer from './conditionalRenderer.jsx';
-import Auth from './auth.jsx';
-import store from '../store/store.js';
 import {
   connect
 } from 'react-redux';
-import changePage from '../actions/changePage.js';
+import PropTypes from 'prop-types';
+import styles from '../css/app.css';
+import VisualConditionalRenderer from '../containers/pageConditionalRenderer';
+import Auth from './auth.jsx';
+import changePage from '../actions/changePage';
 
 
 class App extends React.Component {
@@ -23,25 +23,22 @@ class App extends React.Component {
   render() {
     const {
       loggedIn,
-      page
+      page,
+      authPage
     } = this.props;
     const handlePageChange = this.handlePageChange;
 
     if (loggedIn === false) {
       return <div>
         <Auth
-        page={page}
+        page={authPage}
         loggedIn={loggedIn}
         handlePageChange={handlePageChange}
         />
       </div>
     } else {
       return <div className={styles.container}>
-        <ConditionalRenderer
-          page={page}
-          loggedIn={loggedIn}
-          handlePageChange={handlePageChange}
-          />
+        <VisualConditionalRenderer />
       </div>
     }
   }
@@ -49,9 +46,16 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   loggedIn: state.loggedIn.item,
-  page: state.page.item
+  page: state.page.item,
+  authPage: state.authPage.item,
 });
 
 export default connect(mapStateToProps, {
   changePage
 })(App);
+
+App.propTypes = {
+  loggedIn: PropTypes.bool,
+  page: PropTypes.string,
+  changePage: PropTypes.func,
+};

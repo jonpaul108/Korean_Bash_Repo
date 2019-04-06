@@ -1,9 +1,4 @@
-const express = require('express');
-const app = express();
-const request = require('request');
-const { Pool, Client } = require('pg')
-const bcrypt = require('bcrypt')
-const uuidv4 = require('uuid/v4');
+const { Pool } = require('pg');
 
 const hangul = new Pool({
   user: 'jonathanmcnamara',

@@ -1,23 +1,19 @@
 import React from 'react';
 import Learn from './learnPage.jsx';
 import QuizBoard from './quizBoard.jsx';
-import Register from './register.jsx';
-import SignIn from './signIn.jsx';
-import {
-  connect
-} from 'react-redux';
+import VisualHome from '../containers/homePageContainer';
 
 const ConditionalRenderer = (props) => {
-  const handlePageChange = props.handlePageChange;
-  if (props.page === 'gameboard') {
-    return <div> <QuizBoard handlePageChange={handlePageChange}/> </div>
+  console.log('in conditinoal renderer: ', props.page);
+  if (props.page === 'home') {
+    return <div><VisualHome /></div>
+  } else if (props.page === 'gameboard') {
+    return <div> <QuizBoard /> </div>
   } else if (props.page === 'learn_page') {
     return <div>
-      <Learn
-        handlePageChange={handlePageChange}
-        />
+      <Learn />
   </div>
   }
 }
 
-export default connect()(ConditionalRenderer);
+export default ConditionalRenderer;

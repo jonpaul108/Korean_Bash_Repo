@@ -1,10 +1,10 @@
-import {USERNAME} from './types.js';
+import { USERNAME } from './types';
 
-const username = (username) => (dispatch) => {
-  dispatch({
+const username = (username) => {
+  return {
     type: USERNAME,
     payload: username
-  });
+  };
 }
 
 export default username;

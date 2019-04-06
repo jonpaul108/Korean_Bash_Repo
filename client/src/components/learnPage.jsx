@@ -1,14 +1,13 @@
 import React from 'react';
-import axios from 'axios';
-import styles from '../css/learnPage.css';
-import sound from 'react-sound';
-import AudioPlayer from './audioPlayer.jsx';
 import {
   connect
 } from 'react-redux';
-import learnPageSetup from '../actions/flashCards/learnPageSetup.js';
-import charNum from '../actions/flashCards/charNum.js';
-import changePage from '../actions/changePage.js';
+import PropTypes from 'prop-types';
+import styles from '../css/learnPage.css';
+import AudioPlayer from './audioPlayer.jsx';
+import learnPageSetup from '../actions/flashCards/learnPageSetup';
+import charNum from '../actions/flashCards/charNum';
+import changePage from '../actions/changePage';
 
 class Learn extends React.Component {
   constructor(props) {
@@ -25,7 +24,7 @@ class Learn extends React.Component {
   }
 
 
-  handleNextClick(event) {
+  handleNextClick() {
     let num = this.props.character;
     num++;
     if (num > 2) {
@@ -34,7 +33,7 @@ class Learn extends React.Component {
     this.props.learnPageSetup(num);
   }
 
-  handleBackClick(event) {
+  handleBackClick() {
     let num = this.props.character;
     num--;
     if (num < 0) {
@@ -110,3 +109,15 @@ export default connect(mapStateToProps, {
   charNum,
   changePage
 })(Learn);
+
+Learn.propTypes = {
+  kCharacter: PropTypes.string,
+  eCharacter: PropTypes.string,
+  type: PropTypes.string,
+  examples: PropTypes.string,
+  words: PropTypes.string,
+  soundFile: PropTypes.string,
+  character: PropTypes.string,
+  handlePageChange: PropTypes.func,
+  learnPageSetup: PropTypes.func,
+}

@@ -1,4 +1,4 @@
-import {SIGN_IN} from '../actions/types.js';
+import {SIGN_IN} from '../actions/types';
 
 const initialState = {
   item: false

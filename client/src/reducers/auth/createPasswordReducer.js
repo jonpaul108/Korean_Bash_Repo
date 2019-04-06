@@ -1,4 +1,4 @@
-import {CREATE_PASSWORD} from '../../actions/types.js';
+import {CREATE_PASSWORD} from '../../actions/types';
 
 const initialState = {
   item: ''

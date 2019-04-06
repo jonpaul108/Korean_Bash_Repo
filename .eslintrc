@@ -1,0 +1,25 @@
+{
+  "rules": {
+    "max-len": [1, 100, 2, {ignoreComments: true}],
+    "no-console": 0,
+  },
+  "extends": ["airbnb-base", "plugin:react/recommended", "eslint:recommended"],
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect",
+      }
+    },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+        "browser": true,
+        "node": true
+    },
+}

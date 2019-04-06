@@ -4,7 +4,6 @@ module.exports = {
   target: 'node',
   entry: {
     bundle: path.join(__dirname, 'client/src/index.jsx'),
-    server: path.join(__dirname, 'client/src/server.jsx')
   },
   output: {
     filename: '[name].js',
@@ -13,7 +12,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -33,6 +32,11 @@ module.exports = {
         modules: true,
         localIdentName: '[name]__[local]___[hash:base64:5]'
       }
+    },
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: ['babel-loader','eslint-loader']
     }
     ]
   }

@@ -1,4 +1,4 @@
-import {CREATE_ACCOUNT} from '../actions.types';
+import {CREATE_ACCOUNT} from '../actions/types';
 
 const initialState = {
   item: 'signIn'

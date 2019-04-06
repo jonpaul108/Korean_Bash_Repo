@@ -1,4 +1,4 @@
-import {USERNAME} from '../actions/types.js';
+import {USERNAME} from '../actions/types';
 
 const initialState = {
   item: ''

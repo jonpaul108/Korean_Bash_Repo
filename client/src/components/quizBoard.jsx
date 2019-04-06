@@ -1,9 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 import QuizPiece from './quizPiece.jsx';
 import styles from '../css/quizBoard.css';
-import axios from 'axios';
 import AudioPlayer from './audioPlayer.jsx';
-import utils from '../utils/utils.js';
+import utils from '../utils/utils';
 
 class QuizBoard extends React.Component {
   constructor(props) {
@@ -22,6 +22,7 @@ class QuizBoard extends React.Component {
     this.setQuizPieces = this.setQuizPieces.bind(this);
     this.getPiece = this.getPiece.bind(this);
   }
+
   componentDidMount() {
     this.setQuizPieces();
     this.getPiece();
@@ -41,7 +42,7 @@ class QuizBoard extends React.Component {
         })
       })
       .catch((err) => {
-        console.log('err');
+        console.log(err);
       });
   }
 
@@ -52,7 +53,7 @@ class QuizBoard extends React.Component {
     });
   }
 
-  handlePoint(event) {
+  handlePoint() {
     const score = this.state.score + 1;
     if (score < 5) {
       this.setState({
@@ -67,7 +68,7 @@ class QuizBoard extends React.Component {
       });
     }
   }
-  handleIncorrect(event) {
+  handleIncorrect() {
     const chances = this.state.chances - 1;
     if (chances > 0) {
       this.setState({

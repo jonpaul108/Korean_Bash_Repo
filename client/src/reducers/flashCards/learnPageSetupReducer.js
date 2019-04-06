@@ -1,4 +1,4 @@
-import {LEARN_PAGE_SETUP} from '../../actions/types.js';
+import {LEARN_PAGE_SETUP} from '../../actions/types';
 
 const initialState = {
     kCharacter: '',

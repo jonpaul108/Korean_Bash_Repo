@@ -1,4 +1,4 @@
-import {ACCOUNT_ALREADY_EXITS} from '../../actions/types.js';
+import {ACCOUNT_ALREADY_EXITS} from '../../actions/types';
 
 const initialState = {
   item: ''

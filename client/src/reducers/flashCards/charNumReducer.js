@@ -1,4 +1,4 @@
-import {CHARACTER_NUMBER} from '../../actions/types.js';
+import {CHARACTER_NUMBER} from '../../actions/types';
 
 const initialState = {
   item: 0

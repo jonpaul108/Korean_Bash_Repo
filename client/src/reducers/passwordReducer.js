@@ -1,4 +1,4 @@
-import {PASSWORD} from '../actions/types.js';
+import {PASSWORD} from '../actions/types';
 
 const initialState = {
   item: ''
