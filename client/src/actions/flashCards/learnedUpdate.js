@@ -14,3 +14,4 @@ const learnedNew = data =>  (dispatch) => {
 
 
 //for learn, should read the characters, then listen to options and choose the correct onChange
+//i need to update state for items learned, update points...

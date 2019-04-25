@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "start_dev": "webpack -d --watch",
+    "build": "webpack -d --watch",
     "connect_db": "node db/index.js"
   },
   "author": "Jonathan McNamara",
@@ -36,6 +36,8 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
     "react-sound": "^1.2.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",

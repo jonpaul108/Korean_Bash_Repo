@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CREATE_ACCOUNT, ACCOUNT_ALREADY_EXITS } from './types';
 
-const register = (username, password, email, callback) => (dispatch) => {
+const register = (email, password, username, dispatch, callback) => {
   axios.post('/user', {
     username,
     password,
@@ -12,7 +12,8 @@ const register = (username, password, email, callback) => (dispatch) => {
         type: CREATE_ACCOUNT,
         payload: 'signIn',
       });
-      callback();
+      console.log(callback);
+      dispatch(callback('signIn'));
     })
     .catch(() => {
       dispatch({

@@ -37,7 +37,7 @@ module.exports.readCurrentPiece = (query, res) => {
   });
 }
 
-const createLearnTable = (username) => {
+const createLearnTable = (username, res) => {
     const queryUsers = `SELECT id FROM users WHERE username = '${username}'`;
     Client.query(queryUsers, (err, results) => {
       if (err) {
@@ -45,8 +45,9 @@ const createLearnTable = (username) => {
       } else {
         console.log('learn table results ', results);
         console.log('results: ', results.rows);
-        const id = results.rows[0];
-        const queryStr2 = 'CREATE TABLE user_' + `${id} AS SELECT * FROM korean_bash`;
+        const id = results.rows[0].id;
+        console.log('id in createlearntable: ', id);
+        const queryStr2 = `CREATE TABLE user_` + `${id} AS SELECT * FROM korean_bash`;
         Client.query(queryStr2, (err) => {
           if (err) {
             console.log('failed to create learn table ', err);
@@ -115,20 +116,24 @@ module.exports.createAccount = (email, username, password, res) => {
   }
 
 module.exports.retrieveAccount = (username, password, res) => {
-  let queryStr = `SELECT password, id FROM users WHERE username = '${username}'`;
-  Client.query(queryStr, (err, savedPassword) => {
-    let savedPass = '';
-    let id = '';
-    console.log('saved password in retreiveAccount: ', savedPassword.rows);
-    if (savedPassword.rows[0]) {
-      savedPass = savedPassword.rows[0].password;
-      id = savedPassword.rows[0].id;
+  //get relevant user data
+  let queryStr = `SELECT password, id, points FROM users WHERE username = '${username}'`;
+  Client.query(queryStr, (err, results) => {
+    let savedPass;
+    console.log('saved password in retreiveAccount: ', results.rows);
+    if (results.rows[0]) {
+      savedPass = results.rows[0].password;
     }
+    //compare password
     bcrypt.compare(password, savedPass).then((samePass) => {
-      console.log('same? ', samePass);
       if (samePass === true) {
+        //don't send the password
+        let id = results.rows[0].id;
+        let points = results.rows[0].points;
+        results.rows[0] = {id, points};
         console.log('user exists');
-        res.json(id);
+        //send user data
+        res.json(results);
       } else {
         console.log('failed to log in');
         res.status(403).send();

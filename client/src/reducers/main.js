@@ -22,5 +22,5 @@ export default combineReducers({
   learnPageSetup: learnPageSetupReducer,
   kCharacter: learnPageSetupReducer,
   character: learnPageSetupReducer,
-  userInfo: retrieveUserInfoReducer,
+  userData: retrieveUserInfoReducer,
 });

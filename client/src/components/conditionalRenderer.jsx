@@ -1,5 +1,5 @@
 import React from 'react';
-import Learn from './learnPage.jsx';
+import VisualLearn from '../containers/learnPageContainer';
 import QuizBoard from './quizBoard.jsx';
 import VisualHome from '../containers/homePageContainer';
 
@@ -11,7 +11,7 @@ const ConditionalRenderer = (props) => {
     return <div> <QuizBoard /> </div>
   } else if (props.page === 'learn_page') {
     return <div>
-      <Learn />
+      <VisualLearn />
   </div>
   }
 }

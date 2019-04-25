@@ -1,10 +1,10 @@
 import { CREATE_PASSWORD } from '../types';
 
-const createPassword = password => (dispatch) => {
-  dispatch({
+const createPassword = password => {
+  return {
     type: CREATE_PASSWORD,
     payload: password,
-  });
+  };
 };
 
 export default createPassword;

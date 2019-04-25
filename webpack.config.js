@@ -7,7 +7,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.join(__dirname, 'client/dist')
+    path: path.join(__dirname, 'client/dist'),
   },
   module: {
     rules: [
@@ -17,27 +17,27 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-react', '@babel/preset-env']
-          }
-        }
+            presets: ['@babel/preset-react', '@babel/preset-env'],
+          },
+        },
       },
       {
         test: /\.css$/,
-        loader: 'style-loader'
+        loader: 'style-loader',
       },
       {
-      test: /\.css$/,
-      loader: 'css-loader',
-      query: {
-        modules: true,
-        localIdentName: '[name]__[local]___[hash:base64:5]'
-      }
-    },
-    {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: ['babel-loader','eslint-loader']
-    }
-    ]
-  }
-}
+        test: /\.css$/,
+        loader: 'css-loader',
+        query: {
+          modules: true,
+          localIdentName: '[name]__[local]___[hash:base64:5]',
+        },
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader', 'eslint-loader'],
+      },
+    ],
+  },
+};

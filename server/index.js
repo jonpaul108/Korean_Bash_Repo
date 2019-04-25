@@ -1,45 +1,27 @@
 const express = require('express');
-// require('dotenv').config();
-// const flash = require('connect-flash');
-
-// const request = require('request');
 
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-// const session = require('express-session');
 
 const controller = require('../controller/index.js');
-//new connection with promises
-const db = require('../controller/index-promises');
 
 const app = express();
 const port = process.env.PORT || 3020;
 const jsonParser = bodyParser.json();
 
-// app.use(require('cookie-parser')());
-// const expressSession = require('express-session');
-// app.use(expressSession({secret: 'mySecretKey'}));
-// app.use(passport.initialize());
-// app.use(passport.session());
 app.use(morgan('tiny'));
 app.use('/', express.static(path.join(__dirname, '../client/dist')));
-// app.use(flash());
-// app.use(session({
-//   key: 'user_sid',
-//   secret: 'somerandonstuffs',
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: {
-//       expires: 600000
-//   }
-// }));
+
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'index.html'))
+// });
 
 app.get('/character/:id', (req, res) => {
   const query = req.params.id;

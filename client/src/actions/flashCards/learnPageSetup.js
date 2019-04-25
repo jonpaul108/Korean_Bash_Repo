@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { LEARN_PAGE_SETUP, FAILED_TO_RETRIEVE_CHARACTERS } from '../types';
 
-const learnPageSetup = id => (dispatch) => {
+const learnPageSetup = (id, dispatch) => {
   axios.get(`/character/${id}`)
     .then((response) => {
       const res = response.data.rows[0];

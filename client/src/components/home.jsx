@@ -4,7 +4,12 @@ import styles from '../css/home.css';
 
 const Home = (props) => {
   const {
-    handleChangePage
+    handleChangePage,
+    page,
+    user,
+    points,
+    language,
+    userPic,
   } = props;
   return (
     <div className={styles.wrapper}>
@@ -15,7 +20,10 @@ const Home = (props) => {
               <a>About</a>
               <a value='learnPage' onClick={handleChangePage}>Learn</a>
               <a>Review</a>
-          <div className={styles.profilePic}> <img className={styles.profileImage}></img></div>
+              <div className={styles.profileContainer}>
+                <div className={styles.profilePic}> <img src={userPic} alt='profilePic' className={styles.profileImage}></img></div>
+                <p>{user}</p>
+              </div>
             </header>
             <main className={styles.box}>
               <div className={styles.learn} value='learn_page' onClick={ () => {return handleChangePage('learn_page')}}>
@@ -31,6 +39,15 @@ const Home = (props) => {
                 Alphabet
               </div>
             </main>
+            <aside>
+              <div>Next up:
+                <div>{ language.map((el) => {
+                    return(el.korean)
+                  })
+                }</div>
+              </div>
+              <div>Ready for Review</div>
+            </aside>
           <footer className={styles.box}> </footer>
           </div>
         </div>
@@ -39,6 +56,11 @@ const Home = (props) => {
 
 Home.propTypes = {
   handleChangePage: PropTypes.func,
+  page: PropTypes.string,
+  user: PropTypes.string,
+  points: PropTypes.number,
+  language: PropTypes.array,
+  userPic: PropTypes.string,
 }
 
 export default Home;

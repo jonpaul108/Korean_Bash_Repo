@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
       case CREATE_ACCOUNT:
       return {
         ...state,
-        items: action.data
+        items: action.payload
       }
       default:
       return state;

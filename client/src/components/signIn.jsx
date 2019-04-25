@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+  Link
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from '../css/signIn.css';
 
@@ -39,7 +42,9 @@ class SignIn extends React.Component {
             </div>
           </form>
           <div className={styles.registerContainer}>
-            <button className={styles.register} value='register' onClick={handlePageChange}>Need an account?</button>
+            <Link to='/register' >
+              <button className={styles.register} value='register' onClick={handlePageChange}>Need an account?</button>
+            </Link>
             <span className={styles.message}>{message}</span>
           </div>
         </div>

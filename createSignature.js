@@ -52,3 +52,5 @@ function getSignatureKey(Crypto, key, dateStamp, regionName, serviceName) {
 
                     // get our Signing Key
 var signingKey = getSignatureKey(crypto, secret_key, authDate, region, myService);
+
+var authenticationKey =

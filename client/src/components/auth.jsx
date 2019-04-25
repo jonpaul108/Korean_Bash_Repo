@@ -1,16 +1,18 @@
 import React from 'react';
-import SignIn from '../containers/signInContainer.jsx';
-import Register from './register.jsx';
+import {
+  Route,
+  Redirect,
+  Switch
+} from 'react-router-dom';
+import VisualSignIn from '../containers/signInContainer.jsx';
+import VisualRegister from '../containers/registerContainer';
 
-const Auth = (props) => {
-  const handlePageChange = props.handlePageChange;
-  if (props.page === 'signIn') {
-    return <div><SignIn /></div>
-  } else {
-    return <div><Register
-      handlePageChange={handlePageChange}
-      /></div>
-  }
+const Auth = () => {
+  return (<Switch>
+    <Route path='/login' component={VisualSignIn} />
+    <Route path='/register' component={VisualRegister} />
+    <Route render={() => <Redirect to='/login' />} />
+  </Switch>)
 }
 
 export default Auth;

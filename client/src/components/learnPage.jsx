@@ -1,22 +1,20 @@
 import React from 'react';
-import {
-  connect
-} from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from '../css/learnPage.css';
 import AudioPlayer from './audioPlayer.jsx';
-import learnPageSetup from '../actions/flashCards/learnPageSetup';
-import charNum from '../actions/flashCards/charNum';
-import changePage from '../actions/changePage';
 
 class Learn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showExamples: false,
+      currCharNum: 0,
+      kor: props.words[0].korean,
+      eng: props.words[0].english,
       examples: '아, 안',
-      words: '안녕하세요',
+      word: '안녕하세요',
+      soundFile: props.words[0].sound_file,
       characterSet: 'place holder',
+      type: 'building block',
     }
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
@@ -25,36 +23,51 @@ class Learn extends React.Component {
 
 
   handleNextClick() {
-    let num = this.props.character;
-    num++;
-    if (num > 2) {
-      num = 0;
+    let currCharNum = this.state.currCharNum;
+    currCharNum += 1;
+    const words = this.props.words;
+    console.log('num: ', currCharNum, 'wordsLength: ', words.length);
+    if (currCharNum > (words.length - 1)) {
+      currCharNum = 0;
     }
-    this.props.learnPageSetup(num);
+    const kor = words[currCharNum].korean;
+    const eng = words[currCharNum].english;
+    const soundFile = words[currCharNum].sound_file;
+    this.setState({
+      currCharNum,
+      kor,
+      eng,
+      soundFile,
+    })
   }
 
   handleBackClick() {
-    let num = this.props.character;
-    num--;
-    if (num < 0) {
-      num = 2;
+    let currCharNum = this.state.currCharNum;
+    currCharNum -= 1;
+    const words = this.props.words;
+    console.log('num: ', currCharNum, 'wordsLength: ', words.length);
+    if (currCharNum < 0) {
+      currCharNum = (words.length - 1);
     }
-    this.props.learnPageSetup(num);
+    const kor = words[currCharNum].korean;
+    const eng = words[currCharNum].english;
+    this.setState({
+      currCharNum,
+      kor,
+      eng,
+    })
   }
 
-  componentDidMount() {
-    this.props.learnPageSetup(0);
-  }
 
   render() {
     const {
-      kCharacter,
-      eCharacter,
-      type,
+      kor,
+      eng,
+      soundFile,
+      word,
       examples,
-      words,
-      soundFile
-    } = this.props;
+      type,
+    } = this.state;
     const handlePageChange = this.props.handlePageChange;
     return (
       <div className={styles.background}>
@@ -67,10 +80,10 @@ class Learn extends React.Component {
             />
         </div>
           <div className={styles.kLetterContainer}>
-            <span className={styles.koreanCharacter}> {kCharacter}</span>
+            <span className={styles.koreanCharacter}> {kor}</span>
           </div>
           <div className={styles.englishCharacterContainer}>
-            <span className={styles.englishCharacter}>{eCharacter}</span>
+            <span className={styles.englishCharacter}>{eng}</span>
         </div>
         <div className={styles.changeCharacterContainer}>
           <div>
@@ -80,7 +93,7 @@ class Learn extends React.Component {
             <span> Examples: </span><span>{examples}</span>
           </div>
           <div>
-            <span>Words: </span><span>{words}</span>
+            <span>Words: </span><span>{word}</span>
           </div>
         </div>
         <div className={styles.changeCharacterContainer}>
@@ -95,29 +108,10 @@ class Learn extends React.Component {
     )
   }
 }
-const mapStateToProps = state => ({
-  kCharacter: state.learnPageSetup.kCharacter,
-  eCharacter: state.learnPageSetup.eCharacter,
-  type: state.learnPageSetup.fileType,
-  examples: state.learnPageSetup.examples,
-  words: state.learnPageSetup.words,
-  soundFile: state.learnPageSetup.soundFile,
-  character: state.learnPageSetup.character
-});
-export default connect(mapStateToProps, {
-  learnPageSetup,
-  charNum,
-  changePage
-})(Learn);
+
+export default Learn;
 
 Learn.propTypes = {
-  kCharacter: PropTypes.string,
-  eCharacter: PropTypes.string,
-  type: PropTypes.string,
-  examples: PropTypes.string,
-  words: PropTypes.string,
-  soundFile: PropTypes.string,
-  character: PropTypes.string,
-  handlePageChange: PropTypes.func,
-  learnPageSetup: PropTypes.func,
+  words: PropTypes.array,
+  handleChangePage: PropTypes.func,
 }

@@ -3,12 +3,15 @@ import Home from '../components/home.jsx';
 import changePage from '../actions/changePage';
 
 const mapStateToProps = state => ({
-  page: state.page.item
+  page: state.page.item,
+  user: state.currUsername.item,
+  points: state.userData.number,
+  language: state.userData.item,
+  userPic: state.userData.pic,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   handleChangePage: page => {
-    console.log('home contianer e.value: ', page);
     dispatch(changePage(page));
   }
 });
