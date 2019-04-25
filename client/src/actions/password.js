@@ -1,11 +1,11 @@
-import {PASSWORD} from './types.js';
+import { PASSWORD } from './types';
 
-const password = (password)=> (dispatch) => {
-  dispatch({
+const password = pass => {
+  return {
     type: PASSWORD,
-    payload: password
-  });
-}
+    payload: pass,
+  }
+};
 
 
 export default password;

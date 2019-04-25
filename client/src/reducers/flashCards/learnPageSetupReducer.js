@@ -1,4 +1,4 @@
-import {LEARN_PAGE_SETUP} from '../../actions/types.js';
+import {LEARN_PAGE_SETUP} from '../../actions/types';
 
 const initialState = {
     kCharacter: '',
@@ -12,7 +12,6 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-  console.log('action or learnpagesetup', action.type);
   switch(action.type) {
     case LEARN_PAGE_SETUP:
       return {

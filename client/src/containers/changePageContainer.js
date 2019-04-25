@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
-import ConditionalRenderer from '../components/conditionalRenderer';
-import changePage from '../actions/changPage.js';
+import ConditionalRenderer from '../components/conditionalRenderer.jsx';
+import changePage from '../actions/changePage';
 
 console.log('in change page container');
 const mapStateToProps = (state) => ({
@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-const changePageContainer = connect(
+const ChangePageContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ConditionalRenderer);

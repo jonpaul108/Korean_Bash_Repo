@@ -1,53 +1,50 @@
 import React from 'react';
-import styles from '../css/app.css';
-import ConditionalRenderer from './conditionalRenderer.jsx';
-import Auth from './auth.jsx';
-import store from '../store/store.js';
 import {
-  connect
-} from 'react-redux';
+  BrowserRouter as Router,
+} from "react-router-dom";
+import PropTypes from 'prop-types';
+import styles from '../css/app.css';
+import VisualConditionalRenderer from '../containers/pageConditionalRenderer';
+import Auth from './auth.jsx';
+
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+  handlePageChange(event) {
+    const page = event.target.value;
+    console.log(event.target.value);
+    this.props.changePage(page);
   }
 
-  handleOnChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
   render() {
     const {
       loggedIn,
-      page
     } = this.props;
-    const handleLogIn = this.handleLogIn;
-    const handleOnChange = this.handleOnChange;
-
     if (loggedIn === false) {
-      return <div>
-        <Auth
-        page={page}
-        loggedIn={loggedIn}
-        />
+      return <Router>
+      <div>
+        <Auth loggedIn={loggedIn} />
       </div>
+      </Router>
     } else {
-      return <div className={styles.container}>
-        <ConditionalRenderer
-          page={page}
-          loggedIn={loggedIn}
-          />
-      </div>
+      return <Router>
+          <div className={styles.container}>
+            <VisualConditionalRenderer />
+          </div>
+        </Router>
     }
   }
 }
 
-const mapStateToProps = state => ({
-  loggedIn: state.loggedIn.item,
-  page: state.page.item
-});
+App.propTypes = {
+  loggedIn: PropTypes.bool,
+  page: PropTypes.string,
+  authPage: PropTypes.string,
+  changePage: PropTypes.func,
+};
 
-export default connect(mapStateToProps)(App);
+export default App;

@@ -1,7 +1,7 @@
-import {SIGN_IN} from '../actions/types.js';
+import {SIGN_IN} from '../actions/types';
 
 const initialState = {
-  item: false
+  item: false,
 }
 
 export default (state = initialState, action) => {
@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
     case SIGN_IN:
     return {
       state,
-      item: action.payload
+      item: action.payload[0],
     }
     default:
     return state

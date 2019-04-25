@@ -1,25 +1,26 @@
-import {CREATE_ACCOUNT, ACCOUNT_ALREADY_EXITS} from './types';
 import axios from 'axios';
+import { CREATE_ACCOUNT, ACCOUNT_ALREADY_EXITS } from './types';
 
-const register = (username, password, email, callback) => (dispatch) => {
-    axios.post(`/user`, {
-        username,
-        password,
-        email
-      })
-      .then((response) => {
-        dispatch({
-          type: CREATE_ACCOUNT,
-          payload: 'signIn'
-        });
-        callback();
-      })
-      .catch((err) => {
-        dispatch({
-          type: ACCOUNT_ALREADY_EXITS
-        });
-      })
-  }
+const register = (email, password, username, dispatch, callback) => {
+  axios.post('/user', {
+    username,
+    password,
+    email,
+  })
+    .then(() => {
+      dispatch({
+        type: CREATE_ACCOUNT,
+        payload: 'signIn',
+      });
+      console.log(callback);
+      dispatch(callback('signIn'));
+    })
+    .catch(() => {
+      dispatch({
+        type: ACCOUNT_ALREADY_EXITS,
+      });
+    });
+};
 
 
 export default register;

@@ -1,4 +1,4 @@
-import {ACCOUNT_EMAIL} from '../../actions/types.js';
+import {ACCOUNT_EMAIL} from '../../actions/types';
 
 const initialState = {
   item: ''

@@ -1,7 +1,7 @@
-import {CHANGE_PAGE} from '../actions/types.js';
+import {CHANGE_PAGE} from '../actions/types';
 
 const initialState = {
-  item: 'signIn'
+  item: 'home'
 }
 
 export default (state = initialState, action) => {

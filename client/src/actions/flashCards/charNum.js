@@ -1,10 +1,10 @@
-import {CHARACTER_NUMBER} from '../types.js';
+import { CHARACTER_NUMBER } from '../types';
 
-const charNum = num => (dispatch) => {
-  dispatch({
+const charNum = num => {
+  return {
     type: CHARACTER_NUMBER,
-    payload: num
-  })
-}
+    payload: num,
+  };
+};
 
 export default charNum;

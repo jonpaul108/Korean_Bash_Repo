@@ -1,10 +1,10 @@
-import {ACCOUNT_EMAIL} from './../types.js';
+import { ACCOUNT_EMAIL } from '../types';
 
-const accountEmail = (email) => (dispatch) => {
-  dispatch({
+const accountEmail = email => {
+  return {
     type: ACCOUNT_EMAIL,
-    payload: email
-  })
-}
+    payload: email,
+  };
+};
 
 export default accountEmail;
