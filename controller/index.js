@@ -146,7 +146,7 @@ module.exports.retrieveAccount = (username, password, res) => {
 }
 
 module.exports.updateLearnTable = (id, words) => {
-  const queryStr = `Update user_${id} set  `
+  const queryStr = `Update user_${id} set  `;
 }
 
 module.exports.retrieveUserInfo = (id, res) => {

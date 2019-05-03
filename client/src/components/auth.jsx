@@ -4,7 +4,7 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-import VisualSignIn from '../containers/signInContainer.jsx';
+import VisualSignIn from '../containers/signInContainer';
 import VisualRegister from '../containers/registerContainer';
 
 const Auth = () => {
