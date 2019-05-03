@@ -1,5 +1,6 @@
 const express = require('express');
 
+
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -50,7 +51,7 @@ app.get('/retrieveUserInfo/:id', (req, res) => {
 
 app.put('/user/learnUpdate', (req, res) => {
   const { words } = req.body;
-  db.update(words, res);
+  controller.update(words, res);
 });
 
 
