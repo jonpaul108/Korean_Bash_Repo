@@ -1,11 +1,13 @@
 import React from 'react';
+import {
+  NavLink
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from '../css/home.css';
 
 const Home = (props) => {
   const {
     handleChangePage,
-    page,
     user,
     points,
     language,
@@ -16,7 +18,7 @@ const Home = (props) => {
         <div className={styles.grid}>
             <header className={styles.box}>
               <h1>Korean_Bash</h1>
-              <a>Stats</a>
+              <NavLink>Stats</NavLink>
               <a>About</a>
               <a value='learnPage' onClick={handleChangePage}>Learn</a>
               <a>Review</a>
