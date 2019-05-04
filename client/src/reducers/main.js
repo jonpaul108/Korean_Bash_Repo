@@ -8,14 +8,12 @@ import createPasswordReducer from './auth/createPasswordReducer';
 import messageReducer from './auth/messageReducer';
 import learnPageSetupReducer from './flashCards/learnPageSetupReducer';
 import retrieveUserInfoReducer from './retrieveUserInfoReducer';
-import authPageReducer from './auth/authPageReducer';
 
 export default combineReducers({
   loggedIn: signInReducer,
   currUsername: usernameReducer,
   currPassword: passwordReducer,
   page: changePageReducer,
-  authPage: authPageReducer,
   newPassword: createPasswordReducer,
   email: accountEmailReducer,
   message: messageReducer,

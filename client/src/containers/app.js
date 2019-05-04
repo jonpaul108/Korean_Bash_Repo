@@ -6,7 +6,6 @@ import changePage from '../actions/changePage';
 
 const mapStateToProps = state => ({
   loggedIn: state.loggedIn.item,
-  authPage: state.authPage.item,
 });
 
 const mapDispatchToProps = dispatch => {
