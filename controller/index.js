@@ -1,13 +1,8 @@
-// // const passport = require('passport');
-// const request = require('request');
-
 const bcrypt = require('bcrypt')
 
 const uuidv4 = require('uuid/v4');
 
 const saltRounds = 10;
-
-// const salt = bcrypt.genSaltSync(saltRounds);
 
 const Client = require('../db/index.js');
 
@@ -37,7 +32,7 @@ module.exports.readCurrentPiece = (query, res) => {
   });
 }
 
-const createLearnTable = (username, res) => {
+const createLearnTable = (username) => {
     const queryUsers = `SELECT id FROM users WHERE username = '${username}'`;
     Client.query(queryUsers, (err, results) => {
       if (err) {
@@ -120,7 +115,6 @@ module.exports.retrieveAccount = (username, password, res) => {
   let queryStr = `SELECT password, id, points FROM users WHERE username = '${username}'`;
   Client.query(queryStr, (err, results) => {
     let savedPass;
-    console.log('saved password in retreiveAccount: ', results.rows);
     if (results.rows[0]) {
       savedPass = results.rows[0].password;
     }

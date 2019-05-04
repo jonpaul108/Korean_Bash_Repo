@@ -7,7 +7,6 @@ const learnPageSetup = (id, dispatch) => {
       const res = response.data.rows[0];
       const kCharacter = res.korean;
       const eCharacter = res.english;
-      // const characterSet = this.state.characterSet;
       const fileType = res.type;
       const soundFile = res.sound_file;
       const learned = res.learn;
