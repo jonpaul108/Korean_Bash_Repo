@@ -40,12 +40,12 @@ const Home = (props) => {
                 </div >
               </Link>
               <Link to='/vocab'>
-                <div value='vocab' onClick={ () => {return handleChangePage('vocab')}}>
+                <div>
                   Vocab
                 </div>
               </Link>
               <Link to='/alphabet'>
-                <div value='alphabet' onClick={ () => {return handleChangePage('alphabet')}}>
+                <div>
                   Alphabet
                 </div>
               </Link>
@@ -66,7 +66,6 @@ const Home = (props) => {
 }
 
 Home.propTypes = {
-  handleChangePage: PropTypes.func,
   page: PropTypes.string,
   user: PropTypes.string,
   points: PropTypes.number,
