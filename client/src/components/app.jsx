@@ -9,42 +9,26 @@ import Auth from './auth.jsx';
 
 
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handlePageChange = this.handlePageChange.bind(this);
-  }
-  handlePageChange(event) {
-    const page = event.target.value;
-    console.log(event.target.value);
-    this.props.changePage(page);
-  }
-
-  render() {
-    const {
-      loggedIn,
-    } = this.props;
-    if (loggedIn === false) {
-      return <Router>
+const App = ({
+  loggedIn
+}) => {
+  if (loggedIn === false) {
+    return <Router>
       <div>
         <Auth loggedIn={loggedIn} />
       </div>
       </Router>
-    } else {
-      return <Router>
+  } else {
+    return <Router>
           <div className={styles.container}>
             <VisualConditionalRenderer />
           </div>
         </Router>
-    }
   }
 }
 
 App.propTypes = {
   loggedIn: PropTypes.bool,
-  page: PropTypes.string,
-  authPage: PropTypes.string,
-  changePage: PropTypes.func,
 };
 
 export default App;
