@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  NavLink,
   Link
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -8,7 +7,6 @@ import styles from '../css/home.css';
 
 const Home = (props) => {
   const {
-    handleChangePage,
     user,
     points,
     language,
@@ -19,10 +17,10 @@ const Home = (props) => {
         <div className={styles.grid}>
             <header className={styles.box}>
               <h1>Korean_Bash</h1>
-              <NavLink to='/Stats'>Stats</NavLink>
-              <NavLink to='/about'>About</NavLink>
-              <NavLink to='/learn'>Learn</NavLink>
-              <NavLink to='/review'>Review</NavLink>
+              <Link to='/stats'>Stats</Link>
+              <Link to='/about'>About</Link>
+              <Link to='/learn'>Learn</Link>
+              <Link to='/review'>Review</Link>
               <div className={styles.profileContainer}>
                 <div className={styles.profilePic}> <img src={userPic} alt='profilePic' className={styles.profileImage}></img></div>
                 <p>{user}</p>
