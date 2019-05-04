@@ -7,8 +7,6 @@ import styles from '../css/app.css';
 import VisualConditionalRenderer from '../containers/pageConditionalRenderer';
 import Auth from './auth.jsx';
 
-
-
 const App = ({
   loggedIn
 }) => {
