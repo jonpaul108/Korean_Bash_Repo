@@ -5,9 +5,7 @@ import retrieveUserInfo from './retrieveUserInfo';
 const signIn = (username, password, dispatch) => {
   axios.get(`/login/${username}/${password}`)
     .then((results) => {
-      console.log('results: ', results.data.rows[0].id);
-      const id = results.data.rows[0].id;
-      const points = results.data.rows[0].points;
+      const {id, points} = results.data.rows[0];
       retrieveUserInfo(id, points, dispatch);
       dispatch({
         type: SIGN_IN,

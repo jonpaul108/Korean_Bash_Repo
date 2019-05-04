@@ -15,13 +15,11 @@ class SignIn extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.handleLogin(this.props.currUsername, this.props.currPassword);
-
   }
 
   render() {
     const {
       handleOnChange,
-      handlePageChange,
       loggedIn,
       currUsername,
       currPassword,
@@ -43,7 +41,7 @@ class SignIn extends React.Component {
           </form>
           <div className={styles.registerContainer}>
             <Link to='/register' >
-              <button className={styles.register} value='register' onClick={handlePageChange}>Need an account?</button>
+              <button className={styles.register} value='register'>Need an account?</button>
             </Link>
             <span className={styles.message}>{message}</span>
           </div>
@@ -56,7 +54,6 @@ class SignIn extends React.Component {
 SignIn.propTypes = {
   handleOnChange: PropTypes.func,
   handleLogin: PropTypes.func,
-  handlePageChange: PropTypes.func,
   loggedIn: PropTypes.bool,
   currUsername: PropTypes.string,
   currPassword: PropTypes.string,

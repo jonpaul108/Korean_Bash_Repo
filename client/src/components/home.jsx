@@ -1,11 +1,14 @@
 import React from 'react';
+import {
+  NavLink,
+  Link
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from '../css/home.css';
 
 const Home = (props) => {
   const {
     handleChangePage,
-    page,
     user,
     points,
     language,
@@ -16,28 +19,36 @@ const Home = (props) => {
         <div className={styles.grid}>
             <header className={styles.box}>
               <h1>Korean_Bash</h1>
-              <a>Stats</a>
-              <a>About</a>
-              <a value='learnPage' onClick={handleChangePage}>Learn</a>
-              <a>Review</a>
+              <NavLink to='/Stats'>Stats</NavLink>
+              <NavLink to='/about'>About</NavLink>
+              <NavLink to='/learn'>Learn</NavLink>
+              <NavLink to='/review'>Review</NavLink>
               <div className={styles.profileContainer}>
                 <div className={styles.profilePic}> <img src={userPic} alt='profilePic' className={styles.profileImage}></img></div>
                 <p>{user}</p>
               </div>
             </header>
             <main className={styles.box}>
-              <div className={styles.learn} value='learn_page' onClick={ () => {return handleChangePage('learn_page')}}>
-                Learn
-              </div>
-              <div className={styles.review} value='review' onClick={ () => {return handleChangePage('review')}}>
-                Review
-              </div >
-              <div value='vocab' onClick={ () => {return handleChangePage('vocab')}}>
-                Vocab
-              </div>
-              <div value='alphabet' onClick={ () => {return handleChangePage('alphabet')}}>
-                Alphabet
-              </div>
+              <Link to='/learn'>
+                <div className={styles.learn} value='learn_page' onClick={ () => {return handleChangePage('learn_page')}}>
+                  Learn
+                </div>
+              </Link>
+              <Link to='/review'>
+                <div className={styles.review}>
+                  Review
+                </div >
+              </Link>
+              <Link to='/vocab'>
+                <div>
+                  Vocab
+                </div>
+              </Link>
+              <Link to='/alphabet'>
+                <div>
+                  Alphabet
+                </div>
+              </Link>
             </main>
             <aside>
               <div>Next up:
@@ -55,7 +66,6 @@ const Home = (props) => {
 }
 
 Home.propTypes = {
-  handleChangePage: PropTypes.func,
   page: PropTypes.string,
   user: PropTypes.string,
   points: PropTypes.number,
